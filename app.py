@@ -9,7 +9,7 @@ client = MongoClient('mongodb://localhost:27017/')
 db = client['tourist_app']
 users_collection = db['users']
 places_collection = db['destinations']
-
+messages_collection = db["messages"]
 @app.route('/search')
 def search():
     query = request.args.get('q', '').strip()
@@ -163,9 +163,27 @@ def gallery():
     return render_template('gallery.html', places=places)
 
 # Contact Us route
-@app.route('/contact-us')
+@app.route('/contact-us', methods=["GET", "POST"])
 def contact_us():
+    if request.method == "POST":
+        # Get form data
+        name = request.form.get("name")
+        email = request.form.get("email")
+        message = request.form.get("message")
+        
+        # Store in MongoDB
+        messages_collection.insert_one({
+            "name": name,
+            "email": email,
+            "message": message
+        })
+        
+        return redirect(url_for("success"))  # Redirect or render success page if needed
     return render_template('contact_us.html')
+
+@app.route('/success')
+def success():
+    return render_template('success.html')
 
 # About Us route
 @app.route('/about-us')
