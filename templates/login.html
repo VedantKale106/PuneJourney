@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                url('{{ url_for("static", filename="images/login.webp") }}') no-repeat center center fixed;
+            background-size: cover;
+            backdrop-filter: blur(8px);
+            animation: fadeInBackground 1.5s ease-in-out;
+        }
+
+        /* Background fade-in effect */
+        @keyframes fadeInBackground {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .login-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2rem 3rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            width: 100%;
+            max-width: 400px;
+            transition: transform 0.3s ease;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        /* Slide up effect for the login container */
+        @keyframes slideUp {
+            0% {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .login-container:hover {
+            transform: translateY(-5px);
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            animation: fadeInText 1s ease-out;
+        }
+
+        /* Fade-in effect for the heading */
+        @keyframes fadeInText {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e1e1e1;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            animation: inputFocus 0.3s ease;
+        }
+
+        /* Input focus animation */
+        @keyframes inputFocus {
+            0% {
+                border-color: #e1e1e1;
+                box-shadow: none;
+            }
+
+            100% {
+                border-color: #4a90e2;
+                box-shadow: 0 0 5px rgba(74, 144, 226, 0.6);
+            }
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #4a90e2;
+        }
+
+        button {
+            width: 100%;
+            padding: 1rem;
+            background: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            margin: 1rem 0;
+            gap: 0.5rem;
+        }
+
+        .remember-me input {
+            width: auto;
+        }
+
+        /* Remember me label effect */
+        .remember-me label {
+            font-size: 0.9rem;
+            color: #555;
+            transition: color 0.3s ease;
+        }
+
+        .remember-me input:checked+label {
+            color: #4a90e2;
+        }
+
+        /* Button pulse animation */
+        @keyframes buttonPulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .cta-button {
+            animation: buttonPulse 1s infinite ease-in-out;
+        }
+
+        @media (max-width: 768px) {
+            .login-container {
+                padding: 1.5rem;
+                max-width: 350px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            input {
+                padding: 0.7rem;
+                font-size: 0.9rem;
+            }
+
+            button {
+                padding: 0.9rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <h1>Welcome Back</h1>
+        <form action="/" method="POST">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="remember-me">
+                <input type="checkbox" id="remember" name="remember">
+                <label for="remember">Remember me</label>
+            </div>
+            <button type="submit">Sign In</button>
+        </form>
+        <div style="margin-top: 2rem; font-size: 1rem; color: #666; text-align: center;">
+            <p style="margin-bottom: 1rem;">
+                <span style="font-weight: 500;">Don't have an account?</span>
+                <a href="/register" style="color: #3498db; text-decoration: none; font-weight: 600; transition: color 0.3s ease;"> Register here</a>
+            </p>
+            <p>
+                <span style="font-weight: 500;">Want to browse as a guest?</span>
+                <a href="/guest-login" style="color: #3498db; text-decoration: none; font-weight: 600; transition: color 0.3s ease;"> Login as Guest</a>
+            </p>
+        </div>
+        
+    </div>
+</body>
+
+</html>

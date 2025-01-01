@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.9)),
+            url("{{ url_for('static', filename='images/gallery.jpg') }}") no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, rgba(44, 62, 80, 0.95), rgba(52, 73, 94, 0.95));
+            color: white;
+            padding: 2rem 4rem;
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            animation: slideDown 1s ease-out;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, #fff, #e0e0e0);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 0;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: #e0e0e0;
+            margin: 0;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #1abc9c;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: #1abc9c;
+            transform: translateY(-2px);
+        }
+
+        /* Gallery Container */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            box-sizing: border-box;
+            opacity: 0;
+            animation: fadeInGrid 1s ease-out forwards;
+        }
+
+        /* Gallery Item Styling */
+.gallery-item {
+    text-align: center;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeIn 1s ease-out forwards; /* Add fade-in animation */
+    opacity: 0; /* Start invisible for fade-in effect */
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Fade-in Animation Keyframes */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px); /* Optional: Add slight upward motion */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .gallery-item p {
+            margin: 12px 0;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #f1f1f1;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+        }
+
+        .gallery-item a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* No Places Styling */
+        .no-places {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #bbb;
+            margin-top: 50px;
+        }
+
+        /* Footer Styling */
+        footer {
+            text-align: center;
+            padding: 20px 10px;
+            background: rgba(63, 81, 181, 0.9);
+            color: #fff;
+            margin-top: 40px;
+            font-size: 1rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        footer a {
+            color: #ffeb3b;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        @keyframes slideDown {
+            0% {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInGrid {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            nav {
+                margin-top: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 1.5rem;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .gallery {
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            header p {
+                font-size: 0.9rem;
+            }
+
+            nav a {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div>
+                <h1>JunnarJourney</h1>
+                <p>Discover amazing destinations and create unforgettable memories</p>
+            </div>
+            <nav>
+                <a href="/home">Home</a>
+                <a href="/about-us">About Us</a>
+                <a href="/contact-us">Contact Us</a>
+                <a href="/gallery">Gallery</a>
+                <a href="/profile">Profile</a>
+                <a href="/logout">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Gallery Section -->
+    <div class="gallery">
+        {% if places %}
+        {% for place in places %}
+        <div class="gallery-item">
+            <a href="{{ url_for('destination', index=loop.index0) }}" class="place-card">
+                <img src="{{ url_for('static', filename='images/' ~ place.image) }}" alt="{{ place.name }}">
+                <p>{{ place.name }}</p>
+            </a>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p class="no-places">No places available at the moment.</p>
+        {% endif %}
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>Made with ❤️ by <a href="#">Your Team</a></p>
+    </footer>
+</body>
+</html>

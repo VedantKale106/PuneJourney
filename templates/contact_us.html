@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Enhanced Design</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+    min-height: 100vh;
+    margin: 0;
+    background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+    display: flex;
+    flex-direction: column;
+    position: relative; /* Important for positioning the pseudo-element */
+    overflow: hidden; /* Prevent scrollbars from showing due to pseudo-element */
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('/static/images/contact.jpg') no-repeat center center/cover;
+    filter: blur(10px); /* Adjust the blur intensity */
+    z-index: -1; /* Send the image behind the gradient and content */
+    opacity: 0.5; /* Adjust opacity to blend the image with the gradient */
+}
+
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, rgba(44, 62, 80, 0.95), rgba(52, 73, 94, 0.95));
+            color: white;
+            padding: 2rem 4rem;
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            animation: slideDown 1s ease-out;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, #fff, #e0e0e0);
+            background-clip: border-box;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: #e0e0e0;
+            margin-top: 0.5rem;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #1abc9c;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: #1abc9c;
+            transform: translateY(-2px);
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideDown {
+            0% {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .contact-form {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 600px;
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .contact-form:hover {
+            transform: translateY(-5px);
+        }
+
+        .form-title {
+            color: #1a2a6c;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #1a2a6c;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e1e1e1;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #1a2a6c;
+            box-shadow: 0 0 0 3px rgba(26,42,108,0.2);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        @media (max-width: 768px) {
+    header {
+        padding: 1rem 2rem;
+        text-align: center;
+    }
+
+    .header-content {
+        flex-direction: column; /* Center content vertically */
+        align-items: center;
+    }
+
+    header h1 {
+        font-size: 1.8rem;
+    }
+
+    header p {
+        font-size: 1rem;
+        margin-top: 0.5rem;
+    }
+
+    nav {
+        display: flex;
+        flex-wrap: wrap; /* Allow wrapping for responsiveness */
+        justify-content: center; /* Center the links horizontally */
+        gap: 1rem; /* Add space between links */
+        width: 100%; /* Full-width nav area */
+    }
+
+    nav a {
+        font-size: 1rem;
+        color: white;
+        text-decoration: none;
+        padding: 0.5rem 0; /* Minimal padding to keep links clean */
+        transition: color 0.3s ease, transform 0.2s ease;
+    }
+
+    nav a:hover {
+        color: #1abc9c; /* Highlight text color on hover */
+        transform: translateY(-2px); /* Subtle lift effect */
+    }
+
+    .main-content {
+        padding: 1rem;
+    }
+
+    .contact-form {
+        padding: 1.5rem;
+        width: 100%;
+        max-width: 100%;
+        box-shadow: none;
+    }
+
+    .form-title {
+        font-size: 1.8rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        font-size: 0.9rem;
+    }
+
+    .submit-btn {
+        font-size: 1rem;
+        padding: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    nav {
+        gap: 0.5rem; /* Reduce gap for very small screens */
+    }
+
+    nav a {
+        font-size: 0.9rem;
+    }
+
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    header p {
+        font-size: 0.9rem;
+    }
+
+    .form-title {
+        font-size: 1.5rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        font-size: 0.8rem;
+    }
+
+    .submit-btn {
+        font-size: 0.9rem;
+        padding: 0.7rem;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div>
+                <h1>JunnarJourney</h1>
+                <p>Discover amazing destinations and create unforgettable memories</p>
+            </div>
+            <nav>
+                <a href="/home">Home</a>
+                <a href="/about-us">About Us</a>
+                <a href="/contact-us">Contact Us</a>
+                <a href="/gallery">Gallery</a>
+                <a href="/profile">Profile</a>
+                <a href="/logout">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <form class="contact-form">
+            <h1 class="form-title">Get in Touch</h1>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+    </main>
+</body>
+</html>

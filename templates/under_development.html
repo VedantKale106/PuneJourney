@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Under Development</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f1f1f1, #dfe6e9);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh; /* Allow for scrolling if content exceeds the height */
+            text-align: center;
+            overflow-y: auto; /* Enables vertical scrolling */
+        }
+
+        .development-container {
+            background-color: #ffffff;
+            padding: 4rem;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+            transition: transform 0.3s ease-in-out;
+            overflow: hidden;
+            position: relative;
+            margin-top: 4rem; /* Adds margin at the top to prevent content from touching the top of the viewport */
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            color: #e74c3c;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            letter-spacing: 1px;
+        }
+
+        .under-dev-icon {
+            font-size: 130px;
+            color: #e74c3c;
+            margin: 2rem 0;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-25px);
+            }
+        }
+
+        .reason {
+            background: linear-gradient(135deg, #8e44ad, #3498db);
+            color: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            animation: slideUp 1s ease-in-out;
+        }
+
+        @keyframes slideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .reason h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 1.2rem 2.8rem;
+            font-size: 1.2rem;
+            color: white;
+            background-color: #3498db;
+            border-radius: 8px;
+            text-decoration: none;
+            margin-top: 2rem;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        .button:hover {
+            background-color: #2980b9;
+            transform: translateY(-6px);
+            box-shadow: 0 15px 30px rgba(52, 152, 219, 0.6);
+        }
+
+        .button:focus {
+            outline: none;
+        }
+
+        .background-shape {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 320px;
+            height: 320px;
+            background: radial-gradient(circle, rgba(52, 152, 219, 0.15), rgba(52, 152, 219, 0));
+            border-radius: 50%;
+            animation: scaleShape 4s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes scaleShape {
+            0%, 100% {
+                transform: translateX(-50%) scale(1);
+            }
+            50% {
+                transform: translateX(-50%) scale(1.5);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="development-container">
+        <div class="background-shape"></div>
+        <div class="under-dev-icon">
+            🛠️
+        </div>
+        <h1>Under Development</h1>
+        <p>We're working hard to bring you an exciting new feature. Stay tuned for something amazing!</p>
+        
+        <div class="reason">
+            <h2>Why is this page under construction?</h2>
+            <p>We are currently working on a major upgrade to this page. Our team is building new features and improving the overall user experience. Thank you for your patience as we work to bring you something even better! We can't wait to share the update with you soon!</p>
+        </div>
+
+        <a href="/home" class="button">Back to Home</a>
+    </div>
+
+</body>
+</html>

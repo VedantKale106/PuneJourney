@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background-color: #f6f9fc;
+            overflow-x: hidden;
+        }
+
+        /* Background image and overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('/static/images/profile.jpg');
+            background-size: cover;
+            background-position: center;
+            filter: blur(5px) brightness(0.7);
+            z-index: -2;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.4), rgba(37, 99, 235, 0.4));
+            z-index: -1;
+        }
+
+        .profile-container {
+            width: 100%;
+            max-width: 850px;
+            margin: 2rem;
+            padding: 3rem;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1),
+                        0 1px 3px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .profile-container h1 {
+            font-size: 2.5rem;
+            color: #1a365d;
+            margin-bottom: 2.5rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+
+        .profile-details {
+            margin: 2.5rem 0;
+            padding: 2rem;
+            background-color: rgba(248, 250, 252, 0.8);
+            backdrop-filter: blur(5px);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .profile-details p {
+            font-size: 1.1rem;
+            color: #4a5568;
+            margin: 1.2rem 0;
+            line-height: 1.8;
+            display: flex;
+            justify-content: space-between;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0.8rem;
+            border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+        }
+
+        .profile-details p:last-child {
+            border-bottom: none;
+        }
+
+        .profile-details span {
+            font-weight: 500;
+            color: #2b6cb0;
+        }
+
+        .profile-pic-container {
+            margin-bottom: 2.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .profile-pic-container img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-pic-container img:hover {
+            transform: scale(1.05);
+        }
+
+        .edit-pic-btn {
+            font-size: 0.95rem;
+            color: #3182ce;
+            text-decoration: none;
+            border: 2px solid #3182ce;
+            padding: 0.7rem 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-top: 1rem;
+            font-weight: 500;
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        .edit-pic-btn:hover {
+            background-color: #3182ce;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .logout-btn {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 1rem 2.5rem;
+            background-color: #e53e3e;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .logout-btn:hover {
+            background-color: #c53030;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(229, 62, 62, 0.2);
+        }
+
+        /* Responsive styling */
+        @media (max-width: 768px) {
+            .profile-container {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+
+            .profile-container h1 {
+                font-size: 2rem;
+            }
+
+            .profile-details {
+                padding: 1rem;
+            }
+
+            .profile-details p {
+                font-size: 1rem;
+                flex-direction: column;
+                text-align: center;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <h1>User Profile</h1>
+
+        <div class="profile-pic-container">
+            <img src="{{ user['profile_pic'] or '/static/images/avatar.jpg' }}" alt="Profile Picture">
+            <br>
+            <a href="/under-development" class="edit-pic-btn">Change Profile Picture</a>
+        </div>
+
+        <div class="profile-details">
+            <p><span>Username</span> {{ user['username'] }}</p>
+            <p><span>Full Name</span> {{ user['full_name'] }}</p>
+            <p><span>Phone</span> {{ user['phone'] }}</p>
+        </div>
+
+        <a href="/logout" class="logout-btn">Logout</a>
+    </div>
+</body>
+</html>

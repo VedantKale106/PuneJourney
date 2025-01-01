@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tourist App</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+            url('{{ url_for("static", filename="images/home.webp") }}') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            color: #333;
+            animation: fadeIn 1.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            padding: 4rem 0;
+            color: white;
+            animation: slideIn 1.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        h2 {
+            color: white;
+            font-size: 2.5rem;
+            margin: 2rem 0;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .places-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .place-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            position: relative;
+            opacity: 0;
+            animation: fadeInCard 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeInCard {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .place-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .place-card:hover .card-image {
+            transform: scale(1.1);
+        }
+
+        .card-image-container {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .place-card h3 {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 1rem;
+            font-size: 1.5rem;
+            margin: 0;
+            position: relative;
+        }
+
+        .place-card p {
+            padding: 1.5rem;
+            line-height: 1.6;
+            color: #555;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            opacity: 0;
+            animation: slideInText 1s ease-out forwards;
+        }
+
+        @keyframes slideInText {
+            from {
+                transform: translateX(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        @keyframes slideDown {
+            0% {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .cta-button {
+            display: block;
+            width: fit-content;
+            margin: 3rem auto;
+            padding: 1.2rem 2.5rem;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+            animation: fadeInButton 1.5s ease-out;
+        }
+
+        @keyframes fadeInButton {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+        }
+
+        .icon {
+            margin-right: 10px;
+        }
+
+        .read-more {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 0 1.5rem 1.5rem;
+            font-size: 0.9rem;
+            transition: background 0.3s ease;
+        }
+
+        .read-more:hover {
+            background: #2980b9;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .places-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, rgba(44, 62, 80, 0.95), rgba(52, 73, 94, 0.95));
+            color: white;
+            padding: 2rem 4rem;
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            animation: slideDown 1s ease-out;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, #fff, #e0e0e0);
+            background-clip: border-box;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: #e0e0e0;
+            margin-top: 0.5rem;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #1abc9c;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: #1abc9c;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            nav {
+                margin-top: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 1.5rem;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .card {
+                width: 100%;
+                max-width: 340px;
+            }
+        }
+
+
+
+        .search-container {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+    }
+
+    .search-form {
+        display: flex;
+        gap: 0.5rem;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 0.5rem;
+        border-radius: 50px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .search-input {
+        flex: 1;
+        padding: 1rem 1.5rem;
+        border: none;
+        border-radius: 25px;
+        font-size: 1.1rem;
+        background: transparent;
+        color: #333;
+    }
+
+    .search-input:focus {
+        outline: none;
+    }
+
+    .search-button {
+        background: linear-gradient(135deg, #e74c3c, #c0392b);
+        border: none;
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .search-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+    }
+
+    /* Add this for no results message */
+    .no-results {
+        text-align: center;
+        color: white;
+        background: rgba(0, 0, 0, 0.7);
+        padding: 2rem;
+        border-radius: 10px;
+        margin: 2rem auto;
+        max-width: 600px;
+    }
+
+    /* Responsive design for search */
+    @media (max-width: 768px) {
+        .search-container {
+            padding: 0 0.5rem;
+        }
+
+        .search-input {
+            padding: 0.8rem 1rem;
+            font-size: 1rem;
+        }
+
+        .search-button {
+            padding: 0.8rem 1.5rem;
+        }
+    }
+
+    </style>
+
+<style>
+    .search-wrapper {
+        position: relative;
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    
+    .search-dropdown {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        border: 1px solid #ddd;
+        border-top: none;
+        border-radius: 0 0 4px 4px;
+        max-height: 300px;
+        overflow-y: auto;
+        z-index: 1000;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .dropdown-item {
+        padding: 10px 15px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+    
+    .dropdown-item:hover {
+        background-color: #f5f5f5;
+    }
+    
+    </style>
+</head>
+<body>
+    
+
+
+    <header>
+        <div class="header-content">
+            <div>
+                <h1>JunnarJourney</h1>
+                <p>Discover amazing destinations and create unforgettable memories</p>
+            </div>
+            <nav>
+                <a href="/home">Home</a>
+                <a href="/about-us">About Us</a>
+                <a href="/contact-us">Contact Us</a>
+                <a href="/gallery">Gallery</a>
+                <a href="/profile">Profile</a>
+                <a href="/logout">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+
+
+
+    <div class="search-container" style="display: flex; justify-content: space-between; align-items: center; width: 500 px;">
+        <div class="search-wrapper" style="flex-grow: 1;">
+            <form action="{{ url_for('home') }}" method="GET" class="search-form">
+                <input 
+                    type="text" 
+                    name="q" 
+                    placeholder="Search for places..." 
+                    value="{{ search_query if search_query else '' }}"
+                    class="search-input"
+                    id="searchInput"
+                    autocomplete="off"
+                >
+                <button type="submit" class="search-button">
+                    <i class="fas fa-search"></i> Search
+                </button>
+            </form>
+    
+            {% if search_results %}
+            <div class="search-results">
+                <h3>Search Results:</h3>
+                {% for place in search_results %}
+                    <div class="dropdown-item" onclick="window.location.href='/destination/{{ place.id }}'">
+                        {{ place.name }}
+                    </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    
+        <a href="/start" class="cta-button" style="margin-left: 20px;">
+            <i class="fas fa-car icon"></i> Start Your Journey
+        </a>
+    </div>
+    
+    
+    
+    
+    
+
+
+
+
+
+
+    
+    <div class="container">
+        <div class="places-grid">
+            {% for place in places %}
+                <a href="{{ url_for('destination', index=loop.index0) }}" class="place-card">
+                    <div class="card-image-container">
+                        {% if place['image'] %}
+                            <img src="{{ url_for('static', filename='images/' + place['image']) }}" 
+                                 alt="{{ place['name'] }}" 
+                                 class="card-image">
+                        {% else %}
+                            <img src="{{ url_for('static', filename='images/gallery.jpg') }}" 
+                                 alt="Default image" 
+                                 class="card-image">
+                        {% endif %}
+                    </div>
+        
+                    <h3>
+                        {% if place['name'] %}
+                            {{ place['name'] }}
+                        {% else %}
+                            Default Name
+                        {% endif %}
+                    </h3>
+        
+                    <p>
+                        {% if place['description'] %}
+                            {{ place['description'] }}
+                        {% else %}
+                            No description available.
+                        {% endif %}
+                    </p>
+        
+                    <div class="read-more">
+                        Learn More <i class="fas fa-arrow-right"></i>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+        
+        
+        
+    </div>
+
+</body>
+</html>
