@@ -5,12 +5,11 @@ client = MongoClient("mongodb://localhost:27017")
 db = client["tourist_app"]
 collection = db["destinations"]
 
-# List of 30 destinations in Junnar Taluka with detailed attributes
 places = [
     {
         "name": "Shivneri Fort",
         "description": "The birthplace of Chhatrapati Shivaji Maharaj, Shivneri Fort is a historical landmark offering stunning views and a rich history.",
-        "image": "shivneri.jpg",
+        "image": "shivnerifort.jpg",
         "location": {"latitude": 19.0833, "longitude": 73.6667},
         "best_time_to_visit": "October to March",
         "category": "Historical Fort",
@@ -36,7 +35,7 @@ places = [
     {
         "name": "Lenyadri Caves",
         "description": "The Lenyadri Caves are one of the 18 Buddhist rock-cut temples, located on a hill, and offer breathtaking views.",
-        "image": "leynadri.jpg",
+        "image": "leynadricaves.jpg",
         "location": {"latitude": 19.1020, "longitude": 73.6560},
         "best_time_to_visit": "November to February",
         "category": "Buddhist Caves",
@@ -361,6 +360,7 @@ places += [
     {
         "name": "Sinhagad Fort",
         "description": "A prominent fort known for its historical battles and scenic views.",
+        "image": "sinhagadfort.jpg",
         "location": {
             "latitude": 18.4595,
             "longitude": 73.7768
@@ -390,6 +390,7 @@ places += [
     {
         "name": "Aga Khan Palace",
         "description": "A historical palace that played a significant role in India's freedom struggle.",
+        "image": "agakhanpalace.jpg",
         "location": {
             "latitude": 18.5203,
             "longitude": 73.8567
@@ -424,6 +425,7 @@ places += [
     {
         "name": "Shaniwar Wada",
         "description": "A historical landmark built in 1732, showcasing Maratha architecture.",
+        "image": "shaniwarwada.jpeg",
         "location": {
             "latitude": 18.5204,
             "longitude": 73.8567
@@ -453,6 +455,7 @@ places += [
     {
         "name": "Rajiv Gandhi Zoological Park",
         "description": "A large zoo featuring a variety of animals, reptiles, and birds.",
+        "image": "rajivgandhizoologicalpark.jpeg",
         "location": {
             "latitude": 18.4486,
             "longitude": 73.8482
@@ -483,6 +486,7 @@ places += [
     {
         "name": "Empress Garden",
         "description": "A beautiful garden ideal for picnics and leisurely walks.",
+        "image": "empressgarden.jpeg",
         "location": {
             "latitude": 18.5192,
             "longitude": 73.9082
@@ -512,6 +516,7 @@ places += [
     {
         "name": "Panshet Water Park",
         "description": "An adventure park offering water sports amidst scenic surroundings.",
+        "image": "panshetwaterpark.png",
         "location": {
             "latitude": 18.4758,
             "longitude": 73.6263
@@ -542,6 +547,7 @@ places += [
     {
         "name": "Okayama Friendship Garden",
         "description": "A beautiful Japanese garden promoting peace and friendship.",
+        "image": "okayamafriendshipgarden.jpg",
         "location": {
             "latitude": 18.5116,
             "longitude": 73.9254
@@ -571,6 +577,7 @@ places += [
     {
         "name": "Vetal Tekdi",
         "description": "A popular trekking spot offering panoramic views of Pune.",
+         "image": "vetaltekdi.jpg",
         "location": {
             "latitude": 18.5171,
             "longitude": 73.8203
@@ -599,6 +606,7 @@ places += [
     {
         "name": "Darshan Museum",
         "description": "An interactive museum showcasing the life of Sadhu Vaswani.",
+         "image": "darshanmuseum.jpg",
         "location": {
             "latitude": 18.5200,
             "longitude": 73.8567
@@ -629,6 +637,7 @@ places += [
     {
         "name": "Vishrambaug Wada",
         "description": "An architectural marvel showcasing Maratha heritage.",
+         "image": "vishrambaugwada.jpg",
         "location": {
             "latitude": 18.5167,
             "longitude": 73.8567
@@ -657,6 +666,7 @@ places += [
     {
         "name": "Pataleshwar Cave Temple",
         "description": "An ancient rock-cut temple dedicated to Lord Shiva, showcasing impressive architecture.",
+         "image": "pataleshwarcavetemple.jpg",
         "location": {
             "latitude": 18.5204,
             "longitude": 73.8567
@@ -685,6 +695,7 @@ places += [
     {
         "name": "Bhigwan Bird Sanctuary",
         "description": "A haven for birdwatchers, especially known for migratory birds during winter.",
+        "image": "bhigwanbirdsanctuary.jpg",
         "location": {
             "latitude": 18.6333,
             "longitude": 74.4167
@@ -709,39 +720,9 @@ places += [
         "visitor_tips": "Bring binoculars and a camera for the best experience."
     },
     {
-        "name": "Shivneri Fort",
-        "description": "The birthplace of Chhatrapati Shivaji Maharaj, showcasing impressive fortifications.",
-        "location": {
-            "latitude": 19.0792,
-            "longitude": 73.7078
-        },
-        "best_time_to_visit": "October to March",
-        "category": "Fort",
-        "entry_fee": 0,
-        "opening_hours": "Open all day",
-        "nearby_attractions": [
-            "Junnar Caves"
-        ],
-        "accommodation": [
-            "Hotels in Junnar (10 km away)"
-        ],
-        "things_to_do": [
-            "Trekking",
-            "Exploring"
-        ],
-        "accessibility": [
-            "Not wheelchair accessible"
-        ],
-        "facilities": [
-            "Parking",
-            "Restrooms"
-        ],
-        "historical_significance": "Birthplace of Shivaji Maharaj, built in the 13th century.",
-        "visitor_tips": "Carry water and snacks; the trek can be steep."
-    },
-    {
         "name": "Karla Caves",
         "description": "Ancient Buddhist rock-cut caves featuring intricate carvings and stupas.",
+        "image": "karlacaves.jpg",
         "location": {
             "latitude": 18.7491,
             "longitude": 73.3894
@@ -771,6 +752,7 @@ places += [
     {
         "name": "Mulshi Dam",
         "description": "A scenic dam surrounded by lush greenery, perfect for picnics and nature walks.",
+        "image": "mulshidam.jpeg",
         "location": {
             "latitude": 18.5864,
             "longitude": 73.4871
@@ -800,6 +782,7 @@ places += [
     {
         "name": "Dagdusheth Halwai Ganapati Temple",
         "description": "A famous temple dedicated to Lord Ganesha, known for its grandeur and festival celebrations.",
+        "image": "dagdushethhalwaiganapati.jpg",
         "location": {
             "latitude": 18.5218,
             "longitude": 73.8559
@@ -829,6 +812,7 @@ places += [
     {
         "name": "ISKCON NVCC Temple",
         "description": "A beautiful temple dedicated to Lord Krishna, offering spiritual experiences and cultural events.",
+        "image": "iskconnvcctemple.jpeg",
         "location": {
             "latitude": 18.5300,
             "longitude": 73.8378
@@ -858,6 +842,7 @@ places += [
     {
         "name": "Raja Dinkar Kelkar Museum",
         "description": "A museum showcasing a vast collection of artifacts representing Indian culture.",
+        "image": "rajadinkarkelkarmuseum.jpg",
         "location": {
             "latitude": 18.5204,
             "longitude": 73.8567
@@ -886,6 +871,7 @@ places += [
     {
         "name": "Osho Ashram",
         "description": "A tranquil meditation center founded by Osho, offering various spiritual programs and workshops.",
+        "image": "oshoashram.jpeg",
         "location": {
             "latitude": 18.5304,
             "longitude": 73.8956
@@ -915,6 +901,7 @@ places += [
     {
         "name": "Lal Mahal",
         "description": "A historic palace that was the residence of Chhatrapati Shivaji Maharaj during his childhood.",
+        "image": "lalmahal.jpg",
         "location": {
             "latitude": 18.5204,
             "longitude": 73.8559
@@ -947,6 +934,7 @@ places += [
     {
         "name": "Parvati Hill",
         "description": "A hillock offering panoramic views of Pune and home to several temples.",
+        "image": "parvatihill.jpg",
         "location": {
             "latitude": 18.4857,
             "longitude": 73.8390
@@ -975,6 +963,7 @@ places += [
     {
         "name": "Torna Fort",
         "description": "A historical fort known for its scenic beauty and trekking opportunities.",
+        "image": "tornafort.jpg",
         "location": {
             "latitude": 19.0672,
             "longitude": 73.7283
@@ -1003,6 +992,7 @@ places += [
     {
         "name": "Della Adventure Park",
         "description": "An adventure park offering various thrilling activities and experiences.",
+        "image": "dellaadventurepark.jpg",
         "location": {
             "latitude": 18.7497,
             "longitude": 73.4091
@@ -1033,6 +1023,7 @@ places += [
     {
         "name": "Bund Garden",
         "description": "A popular garden ideal for picnics and leisurely walks.",
+        "image": "bundgarden.jpg",
         "location": {
             "latitude": 18.5251,
             "longitude": 73.8661
@@ -1060,68 +1051,9 @@ places += [
         "visitor_tips": "Ideal for morning walks or evening picnics."
     },
     {
-        "name": "Rajiv Gandhi Zoological Park",
-        "description": "A large zoo featuring a variety of animals, reptiles, and birds.",
-        "location": {
-            "latitude": 18.4486,
-            "longitude": 73.8482
-        },
-        "best_time_to_visit": "October to March",
-        "category": "Zoo",
-        "entry_fee": "25 (Adults), 10 (Children)",
-        "opening_hours": "9:30 AM - 5:00 PM (varies seasonally)",
-        "nearby_attractions": [
-            "Katraj Lake",
-            "Snake Park"
-        ],
-        "accommodation": "Hotels in Katraj (10 km away)",
-        "things_to_do": [
-            "Wildlife Watching",
-            "Photography",
-            "Boating"
-        ],
-        "accessibility": "Wheelchair accessible",
-        "facilities": [
-            "Parking",
-            "Restrooms",
-            "Cafeteria"
-        ],
-        "historical_significance": "Home to various endangered species and conservation efforts.",
-        "visitor_tips": "Plan your visit during feeding times for better animal sightings."
-    },
-    {
-        "name": "Panshet Water Park",
-        "description": "An adventure park offering water sports amidst scenic surroundings.",
-        "location": {
-            "latitude": 18.4758,
-            "longitude": 73.6263
-        },
-        "best_time_to_visit": "June to September (Monsoon)",
-        "category": "Water Park",
-        "entry_fee": "Varies by activity",
-        "opening_hours": "10:00 AM - 6:00 PM",
-        "nearby_attractions": [
-            "Mulshi Dam",
-            "Khadakwasla Dam"
-        ],
-        "accommodation": "Resorts near Panshet (5 km away)",
-        "things_to_do": [
-            "Water Sports",
-            "Boating",
-            "Picnicking"
-        ],
-        "accessibility": "Not wheelchair accessible",
-        "facilities": [
-            "Parking",
-            "Restrooms",
-            "Food stalls"
-        ],
-        "historical_significance": "Popular weekend getaway for locals.",
-        "visitor_tips": "Book water activities in advance during peak season."
-    },
-    {
         "name": "Chaturshringi Temple",
         "description": "A revered temple dedicated to Goddess Chaturshringi, located on a hilltop with stunning views.",
+        "image": "chaturshringitemple.jpg",
         "location": {
             "latitude": 18.5320,
             "longitude": 73.8270
@@ -1149,156 +1081,9 @@ places += [
         "visitor_tips": "Visit during early morning for a peaceful experience."
     },
     {
-        "name": "Empress Garden",
-        "description": "A sprawling garden featuring a variety of flora, perfect for picnics and leisurely strolls.",
-        "location": {
-            "latitude": 18.5192,
-            "longitude": 73.9082
-        },
-        "best_time_to_visit": "November to February",
-        "category": "Garden",
-        "entry_fee": 20,
-        "opening_hours": "9:00 AM - 7:00 PM",
-        "nearby_attractions": [
-            "Bund Garden",
-            "Osho Ashram"
-        ],
-        "accommodation": [
-            "Hotels in Pune (5 km away)"
-        ],
-        "things_to_do": [
-            "Walking",
-            "Photography",
-            "Flower Shows"
-        ],
-        "accessibility": "Wheelchair accessible",
-        "facilities": [
-            "Parking",
-            "Restrooms"
-        ],
-        "historical_significance": "Established in 1880, it showcases rare flora.",
-        "visitor_tips": "Attend flower shows for a vibrant experience."
-    },
-    {
-        "name": "Okayama Friendship Garden",
-        "description": "A beautifully landscaped Japanese garden promoting peace and friendship.",
-        "location": {
-            "latitude": 18.5116,
-            "longitude": 73.9254
-        },
-        "best_time_to_visit": "November to February",
-        "category": "Garden",
-        "entry_fee": "20",
-        "opening_hours": "10:00 AM - 7:00 PM",
-        "nearby_attractions": [
-            "Empress Garden",
-            "Pashan Lake"
-        ],
-        "accommodation": "Hotels in Pune (8 km away)",
-        "things_to_do": [
-            "Walking",
-            "Photography",
-            "Meditation"
-        ],
-        "accessibility": "Wheelchair accessible",
-        "facilities": [
-            "Parking",
-            "Restrooms"
-        ],
-        "historical_significance": "Inspired by Japanese garden design principles.",
-        "visitor_tips": "Visit during cherry blossom season for beautiful views."
-    },
-    {
-        "name": "Della Adventure Park",
-        "description": "An adventure park offering various thrilling activities and experiences.",
-        "location": {
-            "latitude": 18.7497,
-            "longitude": 73.4091
-        },
-        "best_time_to_visit": "Year-round",
-        "category": "Adventure Park",
-        "entry_fee": "Varies by activity",
-        "opening_hours": "11: 00 AM - 8: 00 PM",
-        "nearby_attractions": [
-            "Khandala",
-            "Lonavala"
-        ], 
-     "accommodation": "Resorts in Lonavala (5 km away)", 
-     "things_to_do": [
-            "Zip-lining",
-            "ATV rides",
-            "Camping"
-        ], 
-     "accessibility": "Partially accessible", 
-     "facilities": [
-            "Parking",
-            "Restrooms",
-            "Food stalls"
-        ], 
-     "historical_significance": "Popular adventure destination for thrill-seekers.",
-        "visitor_tips": "Book activities in advance during weekends."
-    },
-    {
-        "name": "Raja Dinkar Kelkar Museum",
-        "description": "A museum showcasing a vast collection of artifacts representing Indian culture.",
-        "location": {
-            "latitude": 18.5204,
-            "longitude": 73.8567
-        },
-        "best_time_to_visit": "Year-round",
-        "category": "Museum",
-        "entry_fee": "50",
-        "opening_hours": "10: 00 AM - 5: 30 PM",
-        "nearby_attractions": [
-            "Darshan Museum",
-            "National War Memorial"
-        ],
-        "accommodation": "Hotels in Pune (3 km away)",
-        "things_to_do": [
-            "Exploring",
-            "Photography"
-        ],
-        "accessibility": "Wheelchair accessible",
-        "facilities": [
-            "Parking",
-            "Restrooms",
-            "Cafeteria"
-        ],
-        "historical_significance":"Houses over 20,000 artifacts collected by Dr. Dinkar Kelkar.", "visitor_tips": "Check out the musical instruments section."
-    },
-    {
-        "name": "Darshan Museum",
-        "description": "An interactive museum journeying through the life and teachings of Sadhu Vaswani.",
-        "location": {
-            "latitude": 18.5200,
-            "longitude": 73.8567
-        },
-        "best_time_to_visit": "Year-round",
-        "category": "Museum",
-        "entry_fee": "50",
-        "opening_hours": "10:00 AM - 5:30 PM",
-        "nearby_attractions": [
-            "National War Memorial",
-            "Raja Dinkar Kelkar Museum"
-        ],
-        "accommodation": "Hotels in Pune (3 km away)",
-        "things_to_do": [
-            "Guided Tours",
-            "Photography",
-            "Interactive Exhibits"
-        ],
-        "accessibility": "Wheelchair accessible",
-        "facilities": [
-            "Parking",
-            "Restrooms",
-            "Cafeteria"
-        ],
-        "historical_significance": "Blending holographic technology with spiritual storytelling.",
-        "visitor_tips": "Check for guided tour timings."
-    },
-    {
         "name": "Peshwe Udyan Zoo",
         "description": "Also known as Rajiv Gandhi Zoological Park, this zoo features a variety of animals, birds, and reptiles in a natural habitat.",
+        "image": "peshwasudyanzoo.jpeg",
         "location": {
             "latitude": 18.4486,
             "longitude": 73.8482
@@ -1326,40 +1111,9 @@ places += [
         "visitor_tips": "Plan your visit during feeding times for better animal sightings."
     },
     {
-        "name": "Vetal Tekdi",
-        "description": "A popular hill for trekking and enjoying panoramic views of Pune city.",
-        "location": {
-            "latitude": 18.5171,
-            "longitude": 73.8203
-        },
-        "best_time_to_visit": "October to March",
-        "category": "Hill Station",
-        "entry_fee": 0,
-        "opening_hours": "Open all day",
-        "nearby_attractions": [
-            "Pashan Lake",
-            "Parvati Hill"
-        ],
-        "accommodation": [
-            "Hotels in Pune (7 km away)"
-        ],
-        "things_to_do": [
-            "Trekking",
-            "Nature Walks",
-            "Photography"
-        ],
-        "accessibility": [
-            "Not wheelchair accessible"
-        ],
-        "facilities": [
-            "Limited parking available"
-        ],
-        "historical_significance": "A natural retreat within the city limits.",
-        "visitor_tips": "Best visited early morning or late afternoon."
-    },
-    {
         "name": "Khadakwasla Dam",
         "description": "A picturesque dam ideal for picnics and water sports activities.",
+        "image": "khadakwasladam.jpeg",
         "location": {
             "latitude": 18.4871,
             "longitude": 73.7723
@@ -1387,95 +1141,9 @@ places += [
         "visitor_tips": "Visit during monsoon for stunning views."
     },
     {
-        "name": "Shaniwar Wada",
-        "description": "A historic fortification that served as the seat of the Peshwas of the Maratha Empire.",
-        "location": {
-            "latitude": 18.5204,
-            "longitude": 73.8567
-        },
-        "best_time_to_visit": "Year-round",
-        "category": "Fort",
-        "entry_fee": "Free",
-        "opening_hours": "8: 00 AM - 6: 30 PM",
-        "nearby_attractions": [
-            "Lal Mahal",
-            "Dagadusheth Halwai Ganapati Temple"
-        ],
-        "accommodation": "Hotels in Pune (3 km away)",
-        "things_to_do": [
-            "Exploring",
-            "Photography",
-            "Light and Sound Show"
-        ],
-        "accessibility": "Partially accessible",
-        "facilities": [
-            "Parking",
-            "Restrooms"
-        ],
-        "historical_significance": "Built in the 18th century, it is a symbol of Maratha power.",
-        "visitor_tips": "Don’t miss the evening light and sound show."
-    },
-    {
-        "name": "Karla Caves",
-        "description": "Ancient Buddhist rock-cut caves featuring intricate carvings and stupas.",
-        "location": {
-            "latitude": 18.7491,
-            "longitude": 73.3894
-        },
-        "best_time_to_visit": "October to March",
-        "category": "Caves",
-        "entry_fee": "Free",
-        "opening_hours": "Sunrise to Sunset",
-        "nearby_attractions": [
-            "Bhaja Caves",
-            "Lohagad Fort"
-        ],
-        "accommodation": "Lonavala Resorts (10 km away)",
-        "things_to_do": [
-            "Exploring",
-            "Photography",
-            "Cultural Tours"
-        ],
-        "accessibility": "Not wheelchair accessible",
-        "facilities": [
-            "Parking",
-            "Restrooms"
-        ],
-        "historical_significance": "Dating back to the 2nd century BC, significant for Buddhist heritage.",
-        "visitor_tips": "Visit early morning for fewer crowds."
-    },
-    {
-        "name": "Mulshi Dam",
-        "description": "A scenic dam surrounded by lush greenery, perfect for picnics and nature walks.",
-        "location": {
-            "latitude": 18.5864,
-            "longitude": 73.4871
-        },
-        "best_time_to_visit": "June to February",
-        "category": "Dam",
-        "entry_fee": "Free",
-        "opening_hours": "Open all day",
-        "nearby_attractions": [
-            "Panshet Water Park",
-            "Bhira Dam"
-        ],
-        "accommodation": "Resorts near Mulshi (5 km away)",
-        "things_to_do": [
-            "Picnicking",
-            "Nature Walks",
-            "Photography"
-        ],
-        "accessibility": "Partially accessible",
-        "facilities": [
-            "Parking",
-            "Restrooms"
-        ],
-        "historical_significance": "A major water supply source for Pune.",
-        "visitor_tips": "Best visited during monsoon for stunning views."
-    },
-    {
         "name": "Tamhini Waterfalls",
         "description": "A stunning waterfall located in the Tamhini region, perfect for nature lovers and photographers.",
+        "image": "tamhiniwaterfalls.jpeg",
         "location": {
             "latitude": 15.5925,
             "longitude": 73.4692
@@ -1504,6 +1172,7 @@ places += [
     {
         "name": "Khadakwasla Lake",
         "description": "A picturesque lake near Khadakwasla Dam, ideal for boating and picnics.",
+        "image": "khadakwaslalake.jpg",
         "location": {
             "latitude": 18.4871,
             "longitude": 73.7723
@@ -1538,6 +1207,7 @@ places += [
     {
         "name": "Chakan Fort",
         "description": "A historic fort known for its strategic location and beautiful surroundings.",
+        "image": "chakanfort.jpg",
         "location": {
             "latitude": 18.7470,
             "longitude": 73.6541
@@ -1566,6 +1236,7 @@ places += [
     {
         "name": "Nehru Memorial Museum",
         "description": "A museum dedicated to Jawaharlal Nehru, featuring his personal belongings and historical artifacts.",
+        "image": "nehrumemorialmuseum.jpeg",
         "location": {
             "latitude": 18.5256,
             "longitude": 73.8452
@@ -1594,6 +1265,7 @@ places += [
     {
         "name": "Saras Baug",
         "description": "A beautiful garden with a temple dedicated to Lord Ganesh, popular for family outings.",
+        "image": "sarasbaug.jpeg",
         "location": {
             "latitude": 18.5204,
             "longitude": 73.8559
@@ -1623,6 +1295,7 @@ places += [
     {
         "name": "Pashan Lake",
         "description": "A serene lake ideal for bird watching and nature walks.",
+        "image": "pashanlake.jpg",
         "location": {
             "latitude": 18.5187,
             "longitude": 73.8257

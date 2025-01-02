@@ -3,24 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile</title>
+    <title>User Profile | JunnarJourney</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
         body {
             font-family: 'Inter', sans-serif;
             margin: 0;
             padding: 0;
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
             background-color: #f6f9fc;
             overflow-x: hidden;
         }
 
-        /* Background image and overlay */
         body::before {
             content: '';
             position: fixed;
@@ -48,160 +44,508 @@
 
         .profile-container {
             width: 100%;
-            max-width: 850px;
-            margin: 2rem;
-            padding: 3rem;
-            background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1),
-                        0 1px 3px rgba(0, 0, 0, 0.05);
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .profile-container h1 {
-            font-size: 2.5rem;
-            color: #1a365d;
-            margin-bottom: 2.5rem;
-            font-weight: 600;
-            letter-spacing: -0.5px;
-        }
-
-        .profile-details {
-            margin: 2.5rem 0;
+            max-width: 1000px;
+            margin: 2rem auto;
             padding: 2rem;
-            background-color: rgba(248, 250, 252, 0.8);
-            backdrop-filter: blur(5px);
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
         }
 
-        .profile-details p {
-            font-size: 1.1rem;
-            color: #4a5568;
-            margin: 1.2rem 0;
-            line-height: 1.8;
-            display: flex;
-            justify-content: space-between;
-            max-width: 400px;
-            margin-left: auto;
-            margin-right: auto;
-            padding: 0.8rem;
-            border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+        .profile-sidebar {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
 
-        .profile-details p:last-child {
-            border-bottom: none;
-        }
-
-        .profile-details span {
-            font-weight: 500;
-            color: #2b6cb0;
+        .profile-main {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
 
         .profile-pic-container {
-            margin-bottom: 2.5rem;
             position: relative;
-            display: inline-block;
+            margin-bottom: 2rem;
         }
 
-        .profile-pic-container img {
-            width: 150px;
-            height: 150px;
+        .profile-pic {
+            width: 180px;
+            height: 180px;
             border-radius: 50%;
             object-fit: cover;
-            border: 4px solid rgba(255, 255, 255, 0.9);
+            border: 4px solid #fff;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
         }
 
-        .profile-pic-container img:hover {
-            transform: scale(1.05);
-        }
-
-        .edit-pic-btn {
-            font-size: 0.95rem;
-            color: #3182ce;
-            text-decoration: none;
-            border: 2px solid #3182ce;
-            padding: 0.7rem 1.5rem;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            display: inline-block;
-            margin-top: 1rem;
-            font-weight: 500;
+        .edit-pic-overlay {
+            position: absolute;
+            bottom: 0;
+            right: 50%;
+            transform: translateX(50%);
             background-color: rgba(255, 255, 255, 0.9);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        .edit-pic-btn:hover {
+        .edit-pic-overlay:hover {
             background-color: #3182ce;
             color: white;
-            transform: translateY(-2px);
         }
 
-        .logout-btn {
-            display: inline-block;
-            margin-top: 1rem;
-            padding: 1rem 2.5rem;
+        .profile-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #3182ce, #2c5282);
+            padding: 1rem;
+            border-radius: 15px;
+            color: white;
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            font-size: 1.8rem;
+            margin: 0;
+        }
+
+        .stat-card p {
+            margin: 0;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section h2 {
+            color: #2d3748;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .info-item {
+            background-color: rgba(247, 250, 252, 0.8);
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        .info-item label {
+            display: block;
+            font-size: 0.9rem;
+            color: #718096;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-item p {
+            margin: 0;
+            color: #2d3748;
+            font-weight: 500;
+        }
+
+        .badges {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: linear-gradient(135deg, #3182ce, #2c5282);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            flex: 1;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: #3182ce;
+            color: white;
+        }
+
+        .btn-danger {
             background-color: #e53e3e;
             color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: 500;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .edit-mode .info-item {
+            background-color: #fff;
+            border: 2px solid #3182ce;
             transition: all 0.3s ease;
+        }
+
+        .info-item input,
+        .info-item select {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 1rem;
+            color: #2d3748;
+            background-color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .info-item input:focus,
+        .info-item select:focus {
+            outline: none;
+            border-color: #3182ce;
+            box-shadow: 0 0 0 2px rgba(49, 130, 206, 0.2);
+        }
+
+        .edit-controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 1rem;
+            opacity: 0;
+            height: 0;
+            transition: all 0.3s ease;
+        }
+
+        .edit-mode .edit-controls {
+            opacity: 1;
+            height: auto;
+        }
+
+        .edit-btn {
+            background: none;
             border: none;
             cursor: pointer;
+            color: #3182ce;
+            font-size: 1rem;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
         }
 
-        .logout-btn:hover {
-            background-color: #c53030;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(229, 62, 62, 0.2);
+        .edit-btn:hover {
+            background-color: rgba(49, 130, 206, 0.1);
         }
 
-        /* Responsive styling */
+        .save-btn, .cancel-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .save-btn {
+            background-color: #3182ce;
+            color: white;
+        }
+
+        .save-btn:hover {
+            background-color: #2c5282;
+        }
+
+        .cancel-btn {
+            background-color: #e2e8f0;
+            color: #4a5568;
+        }
+
+        .cancel-btn:hover {
+            background-color: #cbd5e0;
+        }
+
+        .success-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #48bb78;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: none;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
         @media (max-width: 768px) {
             .profile-container {
-                margin: 1rem;
-                padding: 1.5rem;
-            }
-
-            .profile-container h1 {
-                font-size: 2rem;
-            }
-
-            .profile-details {
+                grid-template-columns: 1fr;
                 padding: 1rem;
             }
 
-            .profile-details p {
-                font-size: 1rem;
-                flex-direction: column;
-                text-align: center;
-                gap: 0.5rem;
+            .info-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
     <div class="profile-container">
-        <h1>User Profile</h1>
+        <div class="profile-sidebar">
+            <div class="profile-pic-container">
+                <img src="{{ user['profile_pic'] or '/static/images/avatar.jpg' }}" alt="Profile Picture" class="profile-pic">
+                <div class="edit-pic-overlay">
+                    <i class="fas fa-camera"></i> Edit
+                </div>
+            </div>
 
-        <div class="profile-pic-container">
-            <img src="{{ user['profile_pic'] or '/static/images/avatar.jpg' }}" alt="Profile Picture">
-            <br>
-            <a href="/under-development" class="edit-pic-btn">Change Profile Picture</a>
+            <h2>{{ user['full_name'] }}</h2>
+            <p style="color: #718096;">@{{ user['username'] }}</p>
+
+            <div class="profile-stats">
+                <div class="stat-card">
+                    <h3>{{ user['trips_count'] or 0 }}</h3>
+                    <p>Trips</p>
+                </div>
+                <div class="stat-card">
+                    <h3>{{ user['reviews_count'] or 0 }}</h3>
+                    <p>Reviews</p>
+                </div>
+            </div>
+
+            <div class="badges">
+                <div class="badge">
+                    <i class="fas fa-award"></i>
+                    Explorer
+                </div>
+                <div class="badge">
+                    <i class="fas fa-star"></i>
+                    Top Reviewer
+                </div>
+            </div>
+
+            <div class="actions">
+                <a href="/edit-profile" class="btn btn-primary">Edit Profile</a>
+                <a href="/logout" class="btn btn-danger">Logout</a>
+            </div>
         </div>
 
-        <div class="profile-details">
-            <p><span>Username</span> {{ user['username'] }}</p>
-            <p><span>Full Name</span> {{ user['full_name'] }}</p>
-            <p><span>Phone</span> {{ user['phone'] }}</p>
+        <div class="success-message" id="successMessage">
+            Changes saved successfully!
         </div>
-
-        <a href="/logout" class="logout-btn">Logout</a>
+    
+        <form id="profileForm" method="POST" action="{{ url_for('update_profile') }}">
+            <div class="profile-container">
+                
+                <div class="profile-main">
+                    <div class="section">
+                        <h2>
+                            <i class="fas fa-user"></i> 
+                            Personal Information
+                            <button type="button" class="edit-btn" onclick="toggleEdit('personal')">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                        </h2>
+                        <div class="info-grid" id="personal-info">
+                            <div class="info-item">
+                                <label>Full Name</label>
+                                <p>{{ user['full_name'] }}</p>
+                                <input type="text" name="full_name" value="{{ user['full_name'] }}" style="display: none;">
+                            </div>
+                            <div class="info-item">
+                                <label>Email</label>
+                                <p>{{ user['email'] }}</p>
+                                <input type="email" name="email" value="{{ user['email'] }}" style="display: none;">
+                            </div>
+                            <div class="info-item">
+                                <label>Phone</label>
+                                <p>{{ user['phone'] }}</p>
+                                <input type="tel" name="phone" value="{{ user['phone'] }}" style="display: none;">
+                            </div>
+                            <div class="info-item">
+                                <label>Location</label>
+                                <p>{{ user['location'] or 'Not specified' }}</p>
+                                <input type="text" name="location" value="{{ user['location'] }}" style="display: none;">
+                            </div>
+                        </div>
+                        <div class="edit-controls" id="personal-controls">
+                            <button type="button" class="cancel-btn" onclick="cancelEdit('personal')">Cancel</button>
+                            <button type="button" class="save-btn" onclick="saveChanges('personal')">Save Changes</button>
+                        </div>
+                    </div>
+    
+                    <div class="section">
+                        <h2>
+                            <i class="fas fa-globe"></i> 
+                            Travel Preferences
+                            <button type="button" class="edit-btn" onclick="toggleEdit('travel')">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                        </h2>
+                        <div class="info-grid" id="travel-info">
+                            <div class="info-item">
+                                <label>Favorite Destinations</label>
+                                <p>{{ user['favorite_destinations'] or 'Not specified' }}</p>
+                                <input type="text" name="favorite_destinations" value="{{ user['favorite_destinations'] }}" style="display: none;">
+                            </div>
+                            <div class="info-item">
+                                <label>Travel Style</label>
+                                <p>{{ user['travel_style'] or 'Not specified' }}</p>
+                                <select name="travel_style" style="display: none;">
+                                    <option value="Luxury" {% if user['travel_style'] == 'Luxury' %}selected{% endif %}>Luxury</option>
+                                    <option value="Budget" {% if user['travel_style'] == 'Budget' %}selected{% endif %}>Budget</option>
+                                    <option value="Adventure" {% if user['travel_style'] == 'Adventure' %}selected{% endif %}>Adventure</option>
+                                    <option value="Cultural" {% if user['travel_style'] == 'Cultural' %}selected{% endif %}>Cultural</option>
+                                </select>
+                            </div>
+                            <div class="info-item">
+                                <label>Preferred Season</label>
+                                <p>{{ user['preferred_season'] or 'Not specified' }}</p>
+                                <select name="preferred_season" style="display: none;">
+                                    <option value="Summer" {% if user['preferred_season'] == 'Summer' %}selected{% endif %}>Summer</option>
+                                    <option value="Winter" {% if user['preferred_season'] == 'Winter' %}selected{% endif %}>Winter</option>
+                                    <option value="Spring" {% if user['preferred_season'] == 'Spring' %}selected{% endif %}>Spring</option>
+                                    <option value="Monsoon" {% if user['preferred_season'] == 'Monsoon' %}selected{% endif %}>Monsoon</option>
+                                </select>
+                            </div>
+                            <div class="info-item">
+                                <label>Languages</label>
+                                <p>{{ user['languages'] or 'Not specified' }}</p>
+                                <input type="text" name="languages" value="{{ user['languages'] }}" style="display: none;">
+                            </div>
+                        </div>
+                        <div class="edit-controls" id="travel-controls">
+                            <button type="button" class="cancel-btn" onclick="cancelEdit('travel')">Cancel</button>
+                            <button type="button" class="save-btn" onclick="saveChanges('travel')">Save Changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    
+        <script>
+            function toggleEdit(section) {
+                const container = document.getElementById(`${section}-info`);
+                container.classList.add('edit-mode');
+                
+                // Show inputs, hide paragraphs
+                container.querySelectorAll('.info-item').forEach(item => {
+                    const p = item.querySelector('p');
+                    const input = item.querySelector('input, select');
+                    if (p && input) {
+                        p.style.display = 'none';
+                        input.style.display = 'block';
+                    }
+                });
+    
+                // Show controls
+                document.getElementById(`${section}-controls`).style.display = 'flex';
+            }
+    
+            function cancelEdit(section) {
+                const container = document.getElementById(`${section}-info`);
+                container.classList.remove('edit-mode');
+                
+                // Hide inputs, show paragraphs
+                container.querySelectorAll('.info-item').forEach(item => {
+                    const p = item.querySelector('p');
+                    const input = item.querySelector('input, select');
+                    if (p && input) {
+                        p.style.display = 'block';
+                        input.style.display = 'none';
+                    }
+                });
+    
+                // Hide controls
+                document.getElementById(`${section}-controls`).style.display = 'none';
+            }
+    
+            function saveChanges(section) {
+                const form = document.getElementById('profileForm');
+                const formData = new FormData(form);
+    
+                fetch('/update_profile', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        showSuccessMessage();
+                        cancelEdit(section);
+                        // Update displayed values
+                        updateDisplayedValues(section);
+                    }
+                });
+            }
+    
+            function updateDisplayedValues(section) {
+                const container = document.getElementById(`${section}-info`);
+                container.querySelectorAll('.info-item').forEach(item => {
+                    const p = item.querySelector('p');
+                    const input = item.querySelector('input, select');
+                    if (p && input) {
+                        p.textContent = input.value || 'Not specified';
+                    }
+                });
+            }
+    
+            function showSuccessMessage() {
+                const message = document.getElementById('successMessage');
+                message.style.display = 'block';
+                setTimeout(() => {
+                    message.style.display = 'none';
+                }, 3000);
+            }
+        </script>
+    
     </div>
 </body>
 </html>

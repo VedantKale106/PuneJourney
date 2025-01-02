@@ -97,6 +97,34 @@ def profile():
     user = users_collection.find_one({'username': session['username']})
     return render_template('profile.html', user=user)
 
+@app.route('/update_profile', methods=['POST'])
+def update_profile():
+    if 'username' not in session:
+        return jsonify({'success': False, 'message': 'Not logged in'})
+    
+    update_data = {
+        'full_name': request.form.get('full_name'),
+        'email': request.form.get('email'),
+        'phone': request.form.get('phone'),
+        'location': request.form.get('location'),
+        'favorite_destinations': request.form.get('favorite_destinations'),
+        'travel_style': request.form.get('travel_style'),
+        'preferred_season': request.form.get('preferred_season'),
+        'languages': request.form.get('languages')
+    }
+    
+    # Remove empty values
+    update_data = {k: v for k, v in update_data.items() if v}
+    
+    try:
+        users_collection.update_one(
+            {'username': session['username']},
+            {'$set': update_data}
+        )
+        return jsonify({'success': True, 'message': 'Profile updated successfully'})
+    except Exception as e:
+        return jsonify({'success': False, 'message': str(e)})
+    
 # Under development route
 @app.route('/under-development')
 def under_development():
@@ -109,18 +137,34 @@ def home():
         return redirect(url_for('login'))
     
     query = request.args.get('q', '').strip()
-    if query:
-        places = places_collection.find({
-            '$or': [
-                {'name': {'$regex': query, '$options': 'i'}},
-                {'description': {'$regex': query, '$options': 'i'}},
-                {'location': {'$regex': query, '$options': 'i'}}
-            ]
-        })
-    else:
-        places = places_collection.find()
+    selected_category = request.args.get('category', '').strip()
     
-    return render_template('home.html', places=places, search_query=query)
+    # Build the filter query
+    filter_query = {}
+    
+    if query:
+        filter_query['$or'] = [
+            {'name': {'$regex': query, '$options': 'i'}},
+            {'description': {'$regex': query, '$options': 'i'}},
+            {'location': {'$regex': query, '$options': 'i'}}
+        ]
+    
+    if selected_category:
+        filter_query['category'] = selected_category
+    
+    # Get all places based on filters
+    places = places_collection.find(filter_query)
+    
+    # Get all unique categories for the dropdown
+    categories = places_collection.distinct('category')
+    
+    return render_template(
+        'home.html',
+        places=places,
+        search_query=query,
+        categories=categories,
+        selected_category=selected_category
+    )
 
 # Start journey route
 @app.route('/start')

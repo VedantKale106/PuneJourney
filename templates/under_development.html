@@ -3,93 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Under Development</title>
+    <title>Coming Soon - Exciting Updates</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #f1f1f1, #dfe6e9);
+            background: linear-gradient(135deg, #a8e6cf, #dcedc1);
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: flex-start;
-            min-height: 100vh; /* Allow for scrolling if content exceeds the height */
+            min-height: 100vh;
             text-align: center;
-            overflow-y: auto; /* Enables vertical scrolling */
+            overflow-y: auto;
         }
 
         .development-container {
-            background-color: #ffffff;
-            padding: 4rem;
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            max-width: 800px;
-            width: 100%;
-            transition: transform 0.3s ease-in-out;
-            overflow: hidden;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+            width: 90%;
+            margin: 3rem auto;
             position: relative;
-            margin-top: 4rem; /* Adds margin at the top to prevent content from touching the top of the viewport */
+            overflow: hidden;
+            backdrop-filter: blur(10px);
         }
 
         h1 {
-            font-size: 3.5rem;
-            color: #e74c3c;
+            font-size: 3.8rem;
+            background: linear-gradient(135deg, #3498db, #2ecc71);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             margin-bottom: 1rem;
-            font-weight: 700;
+            font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
         }
 
-        p {
-            font-size: 1.2rem;
-            color: #555;
-            margin-bottom: 2rem;
-            line-height: 1.6;
-            letter-spacing: 1px;
+        .subtitle {
+            font-size: 1.4rem;
+            color: #666;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
         }
 
-        .under-dev-icon {
-            font-size: 130px;
-            color: #e74c3c;
-            margin: 2rem 0;
-            animation: bounce 2s infinite;
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
         }
 
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-25px);
-            }
-        }
-
-        .reason {
-            background: linear-gradient(135deg, #8e44ad, #3498db);
-            color: #fff;
+        .feature-card {
+            background: linear-gradient(135deg, #fff, #f8f9fa);
             padding: 2rem;
-            border-radius: 10px;
-            margin-bottom: 3rem;
-            font-size: 1.1rem;
-            line-height: 1.6;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            animation: slideUp 1s ease-in-out;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
         }
 
-        @keyframes slideUp {
-            0% {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .feature-card:hover {
+            transform: translateY(-10px);
         }
 
-        .reason h2 {
-            font-size: 1.8rem;
-            margin-bottom: 1.2rem;
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .progress-section {
+            background: linear-gradient(135deg, #3498db, #2ecc71);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            margin: 3rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background: rgba(255, 255, 255, 0.2);
+            height: 10px;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 75%;
+            background: white;
+            border-radius: 5px;
+            animation: progressFill 2s ease-out;
+        }
+
+        @keyframes progressFill {
+            from { width: 0; }
+            to { width: 75%; }
         }
 
         .button {
@@ -97,64 +114,94 @@
             padding: 1.2rem 2.8rem;
             font-size: 1.2rem;
             color: white;
-            background-color: #3498db;
-            border-radius: 8px;
+            background: linear-gradient(135deg, #3498db, #2ecc71);
+            border-radius: 50px;
             text-decoration: none;
             margin-top: 2rem;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.2);
         }
 
         .button:hover {
-            background-color: #2980b9;
-            transform: translateY(-6px);
-            box-shadow: 0 15px 30px rgba(52, 152, 219, 0.6);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(52, 152, 219, 0.4);
         }
 
-        .button:focus {
-            outline: none;
-        }
-
-        .background-shape {
+        .floating-shapes {
             position: absolute;
+            width: 100%;
+            height: 100%;
             top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 320px;
-            height: 320px;
-            background: radial-gradient(circle, rgba(52, 152, 219, 0.15), rgba(52, 152, 219, 0));
-            border-radius: 50%;
-            animation: scaleShape 4s ease-in-out infinite;
+            left: 0;
             z-index: -1;
+            overflow: hidden;
         }
 
-        @keyframes scaleShape {
-            0%, 100% {
-                transform: translateX(-50%) scale(1);
-            }
-            50% {
-                transform: translateX(-50%) scale(1.5);
-            }
+        .shape {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 20s infinite linear;
+        }
+
+        .shape:nth-child(1) { top: 20%; left: 10%; animation-duration: 15s; }
+        .shape:nth-child(2) { top: 60%; left: 70%; animation-duration: 25s; }
+        .shape:nth-child(3) { top: 10%; left: 90%; animation-duration: 20s; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(100px, 100px) rotate(180deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
         }
     </style>
 </head>
 <body>
-
     <div class="development-container">
-        <div class="background-shape"></div>
-        <div class="under-dev-icon">
-            🛠️
-        </div>
-        <h1>Under Development</h1>
-        <p>We're working hard to bring you an exciting new feature. Stay tuned for something amazing!</p>
-        
-        <div class="reason">
-            <h2>Why is this page under construction?</h2>
-            <p>We are currently working on a major upgrade to this page. Our team is building new features and improving the overall user experience. Thank you for your patience as we work to bring you something even better! We can't wait to share the update with you soon!</p>
+        <div class="floating-shapes">
+            <div class="shape">⚡️</div>
+            <div class="shape">🚀</div>
+            <div class="shape">💫</div>
         </div>
 
-        <a href="/home" class="button">Back to Home</a>
+        <h1>Coming Soon</h1>
+        <p class="subtitle">We're crafting something extraordinary for you</p>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3>New Design</h3>
+                <p>A completely reimagined interface that puts user experience first</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡️</div>
+                <h3>Better Performance</h3>
+                <p>Lightning-fast loading times and smoother interactions</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>Enhanced Security</h3>
+                <p>State-of-the-art security features to protect your data</p>
+            </div>
+        </div>
+
+        <div class="progress-section">
+            <h2>Development Progress</h2>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+            <p>75% Complete - Launch Expected Soon!</p>
+        </div>
+
+        <p>Our team is working around the clock to bring you an exceptional experience. The new version will feature improved performance, enhanced security, and a beautiful new design that makes everything easier and more intuitive.</p>
+
+        <div style="margin: 3rem 0;">
+            <h3>What to Expect</h3>
+            <p>• Streamlined navigation and improved user interface<br>
+            • Advanced features for better productivity<br>
+            • Mobile-first responsive design<br>
+            • Integration with modern tools and services</p>
+        </div>
+
+        <a href="/home" class="button">Return to Homepage</a>
     </div>
-
 </body>
 </html>

@@ -6,72 +6,70 @@
     <title>Success</title>
     <style>
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
 
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
-            background: #000;
-        }
-
-        /* Add and blur the background image */
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('/static/images/success.jpg') no-repeat center center/cover;
-            filter: blur(10px);
-            z-index: -1;
-            animation: fadeIn 2s ease-in-out;
+            background: url('/static/images/about.jpg');
+            padding: 20px;
         }
 
         .success-container {
-            background-color: rgba(255, 255, 255, 0.2);
-            color: #fff;
-            padding: 30px 50px;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-            max-width: 500px;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
             width: 90%;
             text-align: center;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
             animation: fadeIn 1.5s ease-in-out;
         }
 
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background-color: #4CAF50;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse 2s infinite;
+        }
+
+        .checkmark {
+            width: 40px;
+            height: 40px;
+            border: 4px solid white;
+            border-top: none;
+            border-right: none;
+            transform: rotate(-45deg);
+            margin-top: -5px;
+        }
+
         .success-message {
-            font-size: 28px;
+            font-size: 32px;
             font-weight: bold;
             margin-bottom: 20px;
-            color: #202991;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+            color: #1a2a6c;
             animation: slideUp 1s ease-in-out;
         }
 
@@ -79,37 +77,112 @@
             font-size: 18px;
             margin-bottom: 30px;
             line-height: 1.6;
-            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+            color: #555;
             animation: slideUp 1.2s ease-in-out;
         }
 
-        a {
-            display: inline-block;
-            background-color: #2193b0;
-            color: #fff;
-            text-decoration: none;
-            font-size: 18px;
-            padding: 12px 25px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        .timeline {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 15px;
             animation: slideUp 1.4s ease-in-out;
         }
 
-        a:hover {
-            background-color: #176f8a;
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #1a2a6c;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            animation: slideUp 1.6s ease-in-out;
+        }
+
+        .primary-button {
+            background: linear-gradient(45deg, #1a2a6c, #b21f1f);
+            color: white;
+            box-shadow: 0 4px 15px rgba(26, 42, 108, 0.4);
+        }
+
+        .secondary-button {
+            background: white;
+            color: #1a2a6c;
+            border: 2px solid #1a2a6c;
+        }
+
+        .button:hover {
             transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-proof {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            animation: slideUp 1.8s ease-in-out;
+        }
+
+        .rating {
+            color: #ffd700;
+            font-size: 24px;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
     <div class="success-container">
-        <h1 class="success-message">Thank you for contacting us!</h1>
+        <div class="success-icon">
+            <div class="checkmark"></div>
+        </div>
+        
+        <h1 class="success-message">Thank You for Reaching Out!</h1>
+        
         <p class="success-details">
-            We have received your message and will get back to you shortly.  
-            Your feedback is valuable to us.
+            We've successfully received your message and appreciate you taking the time to contact us. 
+            Our dedicated team is committed to providing you with the best possible response.
         </p>
-        <a href="/home">Return to Home</a>
+
+        <div class="timeline">
+            <div class="timeline-item">Confirmation email sent to your inbox</div>
+            <div class="timeline-item">Support ticket created</div>
+            <div class="timeline-item">Expected response time: within 24 hours</div>
+        </div>
+
+        <div class="social-proof">
+            <div class="rating">★★★★★</div>
+            <p>"95% of our customers receive a response within 12 hours"</p>
+        </div>
+
+        <div class="button-container">
+            <a href="/home" class="button primary-button">Return to Home</a>
+            <a href="/faq" class="button secondary-button">View FAQs</a>
+        </div>
     </div>
 </body>
 </html>
