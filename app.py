@@ -5,7 +5,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 
-client = MongoClient('mongodb://localhost:27017/')
+client = MongoClient('mongodb+srv://vedant:lulli@portfolio.e8ky0.mongodb.net/')
 db = client['tourist_app']
 users_collection = db['users']
 places_collection = db['destinations']
