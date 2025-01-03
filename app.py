@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session, jsonify
+from flask import Flask, flash, render_template, request, redirect, url_for, session, jsonify
 from pymongo import MongoClient
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -95,12 +95,24 @@ def profile():
         return redirect(url_for('login'))
     
     user = users_collection.find_one({'username': session['username']})
-    return render_template('profile.html', user=user)
+    if not user:
+        return redirect(url_for('login'))
+    
+    # Convert ObjectId to string for JSON serialization
+    user['_id'] = str(user['_id'])
+    editing = request.args.get('edit', '')  # Get which section is being edited
+    return render_template('profile.html', user=user, editing=editing)
+
+@app.route('/profile/edit/<section>')
+def edit_profile_section(section):
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    return redirect(url_for('profile', edit=section))
 
 @app.route('/update_profile', methods=['POST'])
 def update_profile():
     if 'username' not in session:
-        return jsonify({'success': False, 'message': 'Not logged in'})
+        return redirect(url_for('login'))
     
     update_data = {
         'full_name': request.form.get('full_name'),
@@ -121,9 +133,11 @@ def update_profile():
             {'username': session['username']},
             {'$set': update_data}
         )
-        return jsonify({'success': True, 'message': 'Profile updated successfully'})
+        flash('Profile updated successfully!')
     except Exception as e:
-        return jsonify({'success': False, 'message': str(e)})
+        flash('Error updating profile: ' + str(e))
+    
+    return redirect(url_for('profile'))
     
 # Under development route
 @app.route('/under-development')

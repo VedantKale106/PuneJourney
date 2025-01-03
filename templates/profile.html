@@ -8,180 +8,117 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
+        :root {
+            --primary-color: #2563eb;
+            --danger-color: #dc2626;
+            --success-color: #059669;
+            --background-color: #f8fafc;
+            --card-background: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border-color: #e2e8f0;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             margin: 0;
             padding: 0;
             min-height: 100vh;
-            background-color: #f6f9fc;
-            overflow-x: hidden;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: url('/static/images/profile.jpg');
-            background-size: cover;
-            background-position: center;
-            filter: blur(5px) brightness(0.7);
-            z-index: -2;
-        }
-
-        body::after {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.4), rgba(37, 99, 235, 0.4));
-            z-index: -1;
+            background-color: var(--background-color);
+            color: var(--text-primary);
         }
 
         .profile-container {
-            width: 100%;
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 2rem auto;
-            padding: 2rem;
+            padding: 0 1rem;
             display: grid;
             grid-template-columns: 300px 1fr;
             gap: 2rem;
         }
 
         .profile-sidebar {
-            background-color: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
+            background: var(--card-background);
+            border-radius: 16px;
             padding: 2rem;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .profile-main {
-            background-color: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            position: sticky;
+            top: 2rem;
+            height: fit-content;
         }
 
         .profile-pic-container {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 1.5rem;
             position: relative;
-            margin-bottom: 2rem;
         }
 
         .profile-pic {
-            width: 180px;
-            height: 180px;
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            border: 4px solid #fff;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border: 4px solid var(--card-background);
+            box-shadow: 0 0 0 4px var(--primary-color);
         }
 
-        .edit-pic-overlay {
-            position: absolute;
-            bottom: 0;
-            right: 50%;
-            transform: translateX(50%);
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-            transition: all 0.3s ease;
+        .profile-sidebar h2 {
+            text-align: center;
+            margin: 0;
+            color: var(--text-primary);
         }
 
-        .edit-pic-overlay:hover {
-            background-color: #3182ce;
-            color: white;
+        .profile-sidebar p {
+            text-align: center;
+            margin: 0.5rem 0 1.5rem;
+            color: var(--text-secondary);
         }
 
         .profile-stats {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: 1fr 1fr;
             gap: 1rem;
-            margin: 2rem 0;
+            margin-bottom: 1.5rem;
         }
 
         .stat-card {
-            background: linear-gradient(135deg, #3182ce, #2c5282);
+            background: var(--background-color);
             padding: 1rem;
-            border-radius: 15px;
-            color: white;
+            border-radius: 12px;
             text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
         }
 
         .stat-card h3 {
-            font-size: 1.8rem;
             margin: 0;
+            font-size: 1.5rem;
+            color: var(--primary-color);
         }
 
         .stat-card p {
-            margin: 0;
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-
-        .section {
-            margin-bottom: 2rem;
-            padding-bottom: 2rem;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
-        .section:last-child {
-            border-bottom: none;
-        }
-
-        .section h2 {
-            color: #2d3748;
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-        }
-
-        .info-item {
-            background-color: rgba(247, 250, 252, 0.8);
-            padding: 1rem;
-            border-radius: 10px;
-            border: 1px solid rgba(226, 232, 240, 0.8);
-        }
-
-        .info-item label {
-            display: block;
-            font-size: 0.9rem;
-            color: #718096;
-            margin-bottom: 0.5rem;
-        }
-
-        .info-item p {
-            margin: 0;
-            color: #2d3748;
-            font-weight: 500;
+            margin: 0.25rem 0 0;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
         }
 
         .badges {
             display: flex;
-            gap: 1rem;
             flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
         }
 
         .badge {
-            background: linear-gradient(135deg, #3182ce, #2c5282);
+            background: linear-gradient(135deg, var(--primary-color), #1d4ed8);
             color: white;
             padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -190,148 +127,132 @@
         .actions {
             display: flex;
             gap: 1rem;
-            margin-top: 2rem;
         }
 
         .btn {
-            padding: 0.8rem 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem 1rem;
             border-radius: 8px;
             font-weight: 500;
             text-decoration: none;
-            transition: all 0.3s ease;
-            flex: 1;
-            text-align: center;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
         }
 
         .btn-primary {
-            background-color: #3182ce;
+            background: var(--primary-color);
             color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
         }
 
         .btn-danger {
-            background-color: #e53e3e;
+            background: var(--danger-color);
             color: white;
         }
 
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        .btn-danger:hover {
+            background: #b91c1c;
         }
 
-        .edit-mode .info-item {
-            background-color: #fff;
-            border: 2px solid #3182ce;
-            transition: all 0.3s ease;
+        .profile-main {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .section {
+            background: var(--card-background);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .section h2 {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .section h2 i {
+            color: var(--primary-color);
+        }
+
+        .section h2 .btn {
+            margin-left: auto;
+            font-size: 0.875rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .info-item label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .info-item p {
+            margin: 0;
+            color: var(--text-primary);
         }
 
         .info-item input,
         .info-item select {
             width: 100%;
-            padding: 0.5rem;
-            border: 1px solid #e2e8f0;
-            border-radius: 6px;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
             font-size: 1rem;
-            color: #2d3748;
-            background-color: #fff;
-            transition: all 0.3s ease;
+            color: var(--text-primary);
+            background: var(--background-color);
         }
 
         .info-item input:focus,
         .info-item select:focus {
             outline: none;
-            border-color: #3182ce;
-            box-shadow: 0 0 0 2px rgba(49, 130, 206, 0.2);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
         }
 
-        .edit-controls {
+        .flash-message {
+            background: var(--success-color);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .edit-section {
+            margin-top: 2rem;
             display: flex;
             gap: 1rem;
             justify-content: flex-end;
-            margin-top: 1rem;
-            opacity: 0;
-            height: 0;
-            transition: all 0.3s ease;
-        }
-
-        .edit-mode .edit-controls {
-            opacity: 1;
-            height: auto;
-        }
-
-        .edit-btn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: #3182ce;
-            font-size: 1rem;
-            padding: 0.5rem;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-        }
-
-        .edit-btn:hover {
-            background-color: rgba(49, 130, 206, 0.1);
-        }
-
-        .save-btn, .cancel-btn {
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 6px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .save-btn {
-            background-color: #3182ce;
-            color: white;
-        }
-
-        .save-btn:hover {
-            background-color: #2c5282;
-        }
-
-        .cancel-btn {
-            background-color: #e2e8f0;
-            color: #4a5568;
-        }
-
-        .cancel-btn:hover {
-            background-color: #cbd5e0;
-        }
-
-        .success-message {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: #48bb78;
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            display: none;
-            animation: slideIn 0.3s ease-out;
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
         }
 
         @media (max-width: 768px) {
             .profile-container {
                 grid-template-columns: 1fr;
-                padding: 1rem;
             }
 
-            .info-grid {
-                grid-template-columns: 1fr;
+            .profile-sidebar {
+                position: static;
             }
         }
     </style>
@@ -340,22 +261,19 @@
     <div class="profile-container">
         <div class="profile-sidebar">
             <div class="profile-pic-container">
-                <img src="{{ user['profile_pic'] or '/static/images/avatar.jpg' }}" alt="Profile Picture" class="profile-pic">
-                <div class="edit-pic-overlay">
-                    <i class="fas fa-camera"></i> Edit
-                </div>
+                <img src="{{ user.profile_pic|default('/static/images/avatar.jpg') }}" alt="Profile Picture" class="profile-pic">
             </div>
 
-            <h2>{{ user['full_name'] }}</h2>
-            <p style="color: #718096;">@{{ user['username'] }}</p>
+            <h2>{{ user.full_name }}</h2>
+            <p>@{{ user.username }}</p>
 
             <div class="profile-stats">
                 <div class="stat-card">
-                    <h3>{{ user['trips_count'] or 0 }}</h3>
+                    <h3>{{ user.trips_count|default(0) }}</h3>
                     <p>Trips</p>
                 </div>
                 <div class="stat-card">
-                    <h3>{{ user['reviews_count'] or 0 }}</h3>
+                    <h3>{{ user.reviews_count|default(0) }}</h3>
                     <p>Reviews</p>
                 </div>
             </div>
@@ -372,180 +290,169 @@
             </div>
 
             <div class="actions">
-                <a href="/edit-profile" class="btn btn-primary">Edit Profile</a>
-                <a href="/logout" class="btn btn-danger">Logout</a>
+                <a href="{{ url_for('logout') }}" class="btn btn-danger">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </a>
+                <a href="{{ url_for('home') }}" class="btn btn-primary">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Home
+                </a>
             </div>
         </div>
 
-        <div class="success-message" id="successMessage">
-            Changes saved successfully!
-        </div>
-    
-        <form id="profileForm" method="POST" action="{{ url_for('update_profile') }}">
-            <div class="profile-container">
+        <div class="profile-main">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="flash-message">
+                            <i class="fas fa-check-circle"></i>
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <div class="section">
+                <h2>
+                    <i class="fas fa-user"></i>
+                    Personal Information
+                    {% if editing != 'personal' %}
+                        <a href="{{ url_for('edit_profile_section', section='personal') }}" class="btn btn-primary">
+                            <i class="fas fa-edit"></i>
+                            Edit
+                        </a>
+                    {% endif %}
+                </h2>
                 
-                <div class="profile-main">
-                    <div class="section">
-                        <h2>
-                            <i class="fas fa-user"></i> 
-                            Personal Information
-                            <button type="button" class="edit-btn" onclick="toggleEdit('personal')">
-                                <i class="fas fa-edit"></i> Edit
-                            </button>
-                        </h2>
-                        <div class="info-grid" id="personal-info">
+                {% if editing == 'personal' %}
+                    <form action="{{ url_for('update_profile') }}" method="POST">
+                        <div class="info-grid">
                             <div class="info-item">
                                 <label>Full Name</label>
-                                <p>{{ user['full_name'] }}</p>
-                                <input type="text" name="full_name" value="{{ user['full_name'] }}" style="display: none;">
+                                <input type="text" name="full_name" value="{{ user.full_name }}" required>
                             </div>
                             <div class="info-item">
                                 <label>Email</label>
-                                <p>{{ user['email'] }}</p>
-                                <input type="email" name="email" value="{{ user['email'] }}" style="display: none;">
+                                <input type="email" name="email" value="{{ user.email }}" required>
                             </div>
                             <div class="info-item">
                                 <label>Phone</label>
-                                <p>{{ user['phone'] }}</p>
-                                <input type="tel" name="phone" value="{{ user['phone'] }}" style="display: none;">
+                                <input type="tel" name="phone" value="{{ user.phone }}">
                             </div>
                             <div class="info-item">
                                 <label>Location</label>
-                                <p>{{ user['location'] or 'Not specified' }}</p>
-                                <input type="text" name="location" value="{{ user['location'] }}" style="display: none;">
+                                <input type="text" name="location" value="{{ user.location }}">
                             </div>
                         </div>
-                        <div class="edit-controls" id="personal-controls">
-                            <button type="button" class="cancel-btn" onclick="cancelEdit('personal')">Cancel</button>
-                            <button type="button" class="save-btn" onclick="saveChanges('personal')">Save Changes</button>
+                        <div class="edit-section">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i>
+                                Save Changes
+                            </button>
+                            <a href="{{ url_for('profile') }}" class="btn btn-danger">
+                                <i class="fas fa-times"></i>
+                                Cancel
+                            </a>
+                        </div>
+                    </form>
+                {% else %}
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <label>Full Name</label>
+                            <p>{{ user.full_name }}</p>
+                        </div>
+                        <div class="info-item">
+                            <label>Email</label>
+                            <p>{{ user.email }}</p>
+                        </div>
+                        <div class="info-item">
+                            <label>Phone</label>
+                            <p>{{ user.phone|default('Not specified') }}</p>
+                        </div>
+                        <div class="info-item">
+                            <label>Location</label>
+                            <p>{{ user.location|default('Not specified') }}</p>
                         </div>
                     </div>
-    
-                    <div class="section">
-                        <h2>
-                            <i class="fas fa-globe"></i> 
-                            Travel Preferences
-                            <button type="button" class="edit-btn" onclick="toggleEdit('travel')">
-                                <i class="fas fa-edit"></i> Edit
-                            </button>
-                        </h2>
-                        <div class="info-grid" id="travel-info">
+                {% endif %}
+            </div>
+
+            <div class="section">
+                <h2>
+                    <i class="fas fa-globe"></i>
+                    Travel Preferences
+                    {% if editing != 'travel' %}
+                        <a href="{{ url_for('edit_profile_section', section='travel') }}" class="btn btn-primary">
+                            <i class="fas fa-edit"></i>
+                            Edit
+                        </a>
+                    {% endif %}
+                </h2>
+
+                {% if editing == 'travel' %}
+                    <form action="{{ url_for('update_profile') }}" method="POST">
+                        <div class="info-grid">
                             <div class="info-item">
                                 <label>Favorite Destinations</label>
-                                <p>{{ user['favorite_destinations'] or 'Not specified' }}</p>
-                                <input type="text" name="favorite_destinations" value="{{ user['favorite_destinations'] }}" style="display: none;">
+                                <input type="text" name="favorite_destinations" value="{{ user.favorite_destinations }}">
                             </div>
                             <div class="info-item">
                                 <label>Travel Style</label>
-                                <p>{{ user['travel_style'] or 'Not specified' }}</p>
-                                <select name="travel_style" style="display: none;">
-                                    <option value="Luxury" {% if user['travel_style'] == 'Luxury' %}selected{% endif %}>Luxury</option>
-                                    <option value="Budget" {% if user['travel_style'] == 'Budget' %}selected{% endif %}>Budget</option>
-                                    <option value="Adventure" {% if user['travel_style'] == 'Adventure' %}selected{% endif %}>Adventure</option>
-                                    <option value="Cultural" {% if user['travel_style'] == 'Cultural' %}selected{% endif %}>Cultural</option>
+                                <select name="travel_style">
+                                    <option value="Luxury" {% if user.travel_style == 'Luxury' %}selected{% endif %}>Luxury</option>
+                                    <option value="Budget" {% if user.travel_style == 'Budget' %}selected{% endif %}>Budget</option>
+                                    <option value="Adventure" {% if user.travel_style == 'Adventure' %}selected{% endif %}>Adventure</option>
+                                    <option value="Cultural" {% if user.travel_style == 'Cultural' %}selected{% endif %}>Cultural</option>
                                 </select>
                             </div>
                             <div class="info-item">
                                 <label>Preferred Season</label>
-                                <p>{{ user['preferred_season'] or 'Not specified' }}</p>
-                                <select name="preferred_season" style="display: none;">
-                                    <option value="Summer" {% if user['preferred_season'] == 'Summer' %}selected{% endif %}>Summer</option>
-                                    <option value="Winter" {% if user['preferred_season'] == 'Winter' %}selected{% endif %}>Winter</option>
-                                    <option value="Spring" {% if user['preferred_season'] == 'Spring' %}selected{% endif %}>Spring</option>
-                                    <option value="Monsoon" {% if user['preferred_season'] == 'Monsoon' %}selected{% endif %}>Monsoon</option>
+                                <select name="preferred_season">
+                                    <option value="Summer" {% if user.preferred_season == 'Summer' %}selected{% endif %}>Summer</option>
+                                    <option value="Winter" {% if user.preferred_season == 'Winter' %}selected{% endif %}>Winter</option>
+                                    <option value="Spring" {% if user.preferred_season == 'Spring' %}selected{% endif %}>Spring</option>
+                                    <option value="Monsoon" {% if user.preferred_season == 'Monsoon' %}selected{% endif %}>Monsoon</option>
                                 </select>
                             </div>
                             <div class="info-item">
                                 <label>Languages</label>
-                                <p>{{ user['languages'] or 'Not specified' }}</p>
-                                <input type="text" name="languages" value="{{ user['languages'] }}" style="display: none;">
+                                <input type="text" name="languages" value="{{ user.languages }}">
                             </div>
                         </div>
-                        <div class="edit-controls" id="travel-controls">
-                            <button type="button" class="cancel-btn" onclick="cancelEdit('travel')">Cancel</button>
-                            <button type="button" class="save-btn" onclick="saveChanges('travel')">Save Changes</button>
+                        <div class="edit-section">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i>
+                                Save Changes
+                            </button>
+                            <a href="{{ url_for('profile') }}" class="btn btn-danger">
+                                <i class="fas fa-times"></i>
+                                Cancel
+                            </a>
+                        </div>
+                    </form>
+                {% else %}
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <label>Favorite Destinations</label>
+                            <p>{{ user.favorite_destinations|default('Not specified') }}</p>
+                        </div>
+                        <div class="info-item">
+                            <label>Travel Style</label>
+                            <p>{{ user.travel_style|default('Not specified') }}</p>
+                        </div>
+                        <div class="info-item">
+                            <label>Preferred Season</label>
+                            <p>{{ user.preferred_season|default('Not specified') }}</p>
+                        </div>
+                        <div class="info-item">
+                            <label>Languages</label>
+                            <p>{{ user.languages|default('Not specified') }}</p>
                         </div>
                     </div>
-                </div>
+                {% endif %}
             </div>
-        </form>
-    
-        <script>
-            function toggleEdit(section) {
-                const container = document.getElementById(`${section}-info`);
-                container.classList.add('edit-mode');
-                
-                // Show inputs, hide paragraphs
-                container.querySelectorAll('.info-item').forEach(item => {
-                    const p = item.querySelector('p');
-                    const input = item.querySelector('input, select');
-                    if (p && input) {
-                        p.style.display = 'none';
-                        input.style.display = 'block';
-                    }
-                });
-    
-                // Show controls
-                document.getElementById(`${section}-controls`).style.display = 'flex';
-            }
-    
-            function cancelEdit(section) {
-                const container = document.getElementById(`${section}-info`);
-                container.classList.remove('edit-mode');
-                
-                // Hide inputs, show paragraphs
-                container.querySelectorAll('.info-item').forEach(item => {
-                    const p = item.querySelector('p');
-                    const input = item.querySelector('input, select');
-                    if (p && input) {
-                        p.style.display = 'block';
-                        input.style.display = 'none';
-                    }
-                });
-    
-                // Hide controls
-                document.getElementById(`${section}-controls`).style.display = 'none';
-            }
-    
-            function saveChanges(section) {
-                const form = document.getElementById('profileForm');
-                const formData = new FormData(form);
-    
-                fetch('/update_profile', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        showSuccessMessage();
-                        cancelEdit(section);
-                        // Update displayed values
-                        updateDisplayedValues(section);
-                    }
-                });
-            }
-    
-            function updateDisplayedValues(section) {
-                const container = document.getElementById(`${section}-info`);
-                container.querySelectorAll('.info-item').forEach(item => {
-                    const p = item.querySelector('p');
-                    const input = item.querySelector('input, select');
-                    if (p && input) {
-                        p.textContent = input.value || 'Not specified';
-                    }
-                });
-            }
-    
-            function showSuccessMessage() {
-                const message = document.getElementById('successMessage');
-                message.style.display = 'block';
-                setTimeout(() => {
-                    message.style.display = 'none';
-                }, 3000);
-            }
-        </script>
-    
+        </div>
     </div>
 </body>
 </html>
